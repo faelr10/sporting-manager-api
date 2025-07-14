@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid()) @db.Uuid
+  name       String   @db.VarChar(255)
+  email      String   @unique @db.VarChar(255)
+  password   String   @db.VarChar(255)
+  local_name String   @db.VarChar(255)
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+
+  @@map("user")
+}
+
+model Schedule {
+  id          String   @id @default(uuid()) @db.Uuid
+  user_id     String   @db.Uuid
+  client_name String   @db.VarChar(255)
+  date        String   @db.VarChar(255)
+  start_time  String   @db.VarChar(255)
+  end_time    String   @db.VarChar(255)
+  recurrence  Json?
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+
+  @@map("schedule")
+}
+
+model Account {
+  id         String   @id @default(uuid()) @db.Uuid
+  user_id    String   @db.Uuid
+  status     String   @db.VarChar(255)
+  type       String   @db.VarChar(255)
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+
+  @@map("account")
+}
