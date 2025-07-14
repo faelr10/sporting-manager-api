@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient, Schedule } from 'generated/prisma';
-import { IParamsScheduleRepository, IScheduleRepository } from './structure';
+import {
+  IParamsScheduleRepository,
+  IParamsUpdateScheduleRepository,
+  IScheduleRepository,
+} from './structure';
 
 @Injectable()
 export class ScheduleRepository implements IScheduleRepository {
@@ -29,6 +33,22 @@ export class ScheduleRepository implements IScheduleRepository {
     return this.prisma.schedule.findMany({
       where: { user_id: userId },
       orderBy: { date: 'asc' },
+    });
+  }
+
+  async updateSchedule(
+    id: string,
+    params: IParamsUpdateScheduleRepository,
+  ): Promise<Schedule | null> {
+    return this.prisma.schedule.update({
+      where: { id },
+      data: params,
+    });
+  }
+
+  async deleteSchedule(id: string): Promise<Schedule | null> {
+    return this.prisma.schedule.delete({
+      where: { id },
     });
   }
 }

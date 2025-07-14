@@ -3,6 +3,7 @@ import { CreateScheduleDto } from './dto/createSchedule.dto';
 import { ScheduleRepository } from './schedule.repository';
 import {
   IParamsScheduleRepository,
+  IParamsUpdateScheduleRepository,
   IScheduleRepository,
   IScheduleService,
 } from './structure';
@@ -85,5 +86,16 @@ export class ScheduleService implements IScheduleService {
     );
 
     return schedules;
+  }
+
+  async updateSchedule(
+    id: string,
+    params: IParamsUpdateScheduleRepository,
+  ): Promise<Schedule | null> {
+    return this.scheduleRepository.updateSchedule(id, params);
+  }
+
+  async deleteSchedule(id: string): Promise<Schedule | null> {
+    return this.scheduleRepository.deleteSchedule(id);
   }
 }
