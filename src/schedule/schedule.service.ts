@@ -19,7 +19,6 @@ export class ScheduleService implements IScheduleService {
   async createSchedule(params: CreateScheduleDto): Promise<any> {
     const scheduleBase = {
       ...params,
-      user_id: '97443970-f547-4c2f-ab5c-58895516eabd', // fixo por enquanto
     };
 
     // 1. Verifica conflitos

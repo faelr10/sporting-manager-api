@@ -30,6 +30,8 @@ export class ScheduleRepository implements IScheduleRepository {
   }
 
   async getAllSchedulesByUserId(userId: string): Promise<Schedule[]> {
+    console.log(`Fetching schedules for user ID: ${userId}`);
+
     return this.prisma.schedule.findMany({
       where: { user_id: userId },
       orderBy: { date: 'asc' },

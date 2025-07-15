@@ -17,6 +17,10 @@ export class CreateScheduleDto {
   @IsNotEmpty()
   client_name: string;
 
+  @IsString()
+  @IsNotEmpty()
+  user_id: string;
+
   @IsOptional()
   recurrence: {
     frequency: string;
