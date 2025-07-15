@@ -9,7 +9,7 @@ async function bootstrap() {
   app.enableCors({
     origin: 'https://www.manager-sportings.com.br',
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
