@@ -88,6 +88,10 @@ export class ScheduleService implements IScheduleService {
     return schedules;
   }
 
+  async getSchedulesByUserId(id: string): Promise<Schedule[]> {
+    return this.scheduleRepository.getAllSchedulesByUserId(id);
+  }
+
   async updateSchedule(
     id: string,
     params: IParamsUpdateScheduleRepository,

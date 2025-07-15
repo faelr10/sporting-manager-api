@@ -29,6 +29,11 @@ export class ScheduleController {
     return this.scheduleService.getAllSchedules();
   }
 
+  @Get(':id')
+  findByUserId(@Param('id') id: string) {
+    return this.scheduleService.getSchedulesByUserId(id);
+  }
+
   @Patch(':id')
   async update(@Param('id') id: string, @Body() params: UpdateScheduleDto) {
     return this.scheduleService.updateSchedule(id, params);

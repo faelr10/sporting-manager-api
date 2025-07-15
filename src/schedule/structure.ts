@@ -4,6 +4,7 @@ import { CreateScheduleDto } from './dto/createSchedule.dto';
 export interface IScheduleService {
   createSchedule(params: CreateScheduleDto): Promise<Schedule>;
   getAllSchedules(): Promise<Schedule[]>;
+  getSchedulesByUserId(id: string): Promise<Schedule[]>;
   updateSchedule(
     id: string,
     params: IParamsUpdateScheduleRepository,
