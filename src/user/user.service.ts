@@ -7,11 +7,13 @@ import {
 import { IUserRepository, IUserResponse, IUserService } from './structure';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserRepository } from './user.repository';
+import { AccountService } from 'src/account/account.service';
 
 @Injectable()
 export class UserService implements IUserService {
   constructor(
     @Inject(UserRepository) private readonly userRepository: IUserRepository,
+    @Inject(AccountService) private readonly accountService: AccountService,
   ) {}
 
   async createUser(params: CreateUserDto): Promise<IUserResponse> {
@@ -23,6 +25,12 @@ export class UserService implements IUserService {
     }
 
     const newUser = await this.userRepository.createUser(params);
+    if (!newUser) {
+      throw new NotFoundException('User creation failed');
+    }
+    await this.accountService.createAccount({
+      user_id: newUser.id,
+    });
     return {
       id: newUser.id,
       name: newUser.name,
