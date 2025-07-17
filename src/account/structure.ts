@@ -4,6 +4,7 @@ import { CreateAccountDto } from './dto/createAccount.dto';
 export interface IAccountService {
   createAccount(params: CreateAccountDto): Promise<Account>;
   getAccountById(id: string): Promise<Account | null>;
+  verifyStatusAccount(id: string): Promise<AccountStatusResponse>;
 }
 
 export interface IAccountRepository {
@@ -28,3 +29,8 @@ export enum AccountType {
   TRAIL = 'trail',
   MENSAL = 'mensalista',
 }
+
+export type AccountStatusResponse = {
+  status: string;
+  type: string;
+};

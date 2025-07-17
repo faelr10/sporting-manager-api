@@ -1,15 +1,15 @@
-import { Body, Controller, Inject, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { IAccountService } from './structure';
 
-@Controller('auth')
+@Controller('account')
 export class AccountController {
   constructor(
     @Inject(AccountService) private readonly accountService: IAccountService,
   ) {}
 
-  @Post('login')
-  login(@Param('id') id: string) {
-    return this.accountService.getAccountById(id);
+  @Get(':id')
+  getAccount(@Param('id') id: string) {
+    return this.accountService.verifyStatusAccount(id);
   }
 }
