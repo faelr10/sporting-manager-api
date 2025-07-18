@@ -32,7 +32,7 @@ export class AuthService {
       { email: params.email, id: verifyExist.id },
       {
         secret,
-        expiresIn: '30s',
+        expiresIn: '1h',
       },
     );
 
