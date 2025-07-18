@@ -7,11 +7,13 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { IScheduleService } from './structure';
 import { ScheduleService } from './schedule.service';
 import { CreateScheduleDto } from './dto/createSchedule.dto';
 import { UpdateScheduleDto } from './dto/updateSchedule.dto';
+import { AuthGuard } from 'src/middleware/auth.guard';
 
 @Controller('schedule')
 export class ScheduleController {
@@ -29,6 +31,7 @@ export class ScheduleController {
     return this.scheduleService.getAllSchedules();
   }
 
+  @UseGuards(AuthGuard)
   @Get(':id')
   findByUserId(@Param('id') id: string) {
     return this.scheduleService.getSchedulesByUserId(id);
